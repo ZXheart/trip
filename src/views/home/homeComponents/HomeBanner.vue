@@ -4,7 +4,11 @@
 
 <template>
   <div class="home-banner">
-    <img src="@/assets/img/home/banner.webp" alt="welcome~">
+    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" lazy-render>
+      <van-swipe-item><img src="@/assets/img/home/banner.webp" alt="welcome~"></van-swipe-item>
+      <van-swipe-item><img src="@/assets/img/home/banner.webp" alt="welcome~"></van-swipe-item>
+      <van-swipe-item><img src="@/assets/img/home/banner.webp" alt="welcome~"></van-swipe-item>
+    </van-swipe>
   </div>
 </template>
 

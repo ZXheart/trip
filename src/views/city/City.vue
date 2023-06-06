@@ -1,9 +1,9 @@
 <script setup>
 import { useCityStore } from '@/stores/index'
 import CityTop from './cityComponents/CityTop.vue'
-import CityContent from './cityComponents/CityContent.vue'
+import CityList from './cityComponents/CityList.vue'
 
-// 发送网络请求
+// fetchAllCity'data - put the data into pinia(cityData)
 const { fetchAllCity } = useCityStore()
 fetchAllCity()
 
@@ -13,7 +13,7 @@ fetchAllCity()
 <template>
   <div class="city">
     <CityTop />
-    <CityContent />
+    <CityList />
   </div>
 </template>
 

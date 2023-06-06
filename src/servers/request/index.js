@@ -2,7 +2,7 @@ import { BASE_URL, TIMEOUT } from './config'
 
 import axios from "axios"
 
-class PackAxios {
+class PackagedAxios {
   constructor(baseURL, timeout = 10000) {
     this.instance = axios.create({
       baseURL,
@@ -28,7 +28,7 @@ class PackAxios {
     return this.request({ ...config, method: "post" })
   }
 }
-const axiosInstance = new PackAxios(BASE_URL, TIMEOUT)
+const axiosInstance = new PackagedAxios(BASE_URL, TIMEOUT)
 export default axiosInstance
 
 
