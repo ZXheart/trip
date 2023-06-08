@@ -1,0 +1,71 @@
+.clearfix {
+//清除浮动
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+// 下三角(边框)
+.down-squre {
+  width: 6px;
+  height: 6px;
+  border: 1px solid #999;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+  background-color: transparent;
+}
+
+// 上三角(边框)
+.top-squre {
+  width: 6px;
+  height: 6px;
+  border: 1px solid #999;
+  border-right: none;
+  border-bottom: none;
+  transform: rotate(45deg);
+  background-color: transparent;
+}
+
+// 下三角
+.down {
+  display: block;
+  width: 0;
+  height: 0;
+  border: 2vw solid #999;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+// 上三角
+.down {
+  display: block;
+  width: 0;
+  height: 0;
+  border: 2vw solid #999;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-top-color: transparent;
+}
+// 单行省略
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+// 两行省略
+.two-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 2; //两行显示
+    -webkit-line-clamp: 2; //兼容webkit
+    display: -webkit-box; //将对象作为弹性盒子显示
+    -webkit-box-orient: vertical; //从上到下垂直排列子元素
+}

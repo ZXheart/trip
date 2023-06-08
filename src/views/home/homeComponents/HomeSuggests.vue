@@ -3,7 +3,7 @@ import { useHotSuggestsStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router';
 
-// import state of suggests from pinia( home > useHotSuggestsStore )
+// import state of hotSuggestsData from pinia( home > useHotSuggestsStore )
 const { hotSuggestsData } = storeToRefs(useHotSuggestsStore())
 
 // hot suggests search function 
