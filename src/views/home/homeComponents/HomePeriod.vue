@@ -1,21 +1,17 @@
 <script setup>
-import { ref } from 'vue'
 import { usePeriodStore } from '@/stores'
-import { storeToRefs } from 'pinia';
+import { storeToRefs } from 'pinia'
+
+import HomeCalendar from '@/components/home-calendar/HomeCalendar.vue'
 
 // import state of period from pinia( home > usePeriodStore )
-const { inTimestamp, outTimestamp, checkIn, checkOut, stayPeriod
+const { homeCalendarState, inTimestamp, outTimestamp, checkIn, checkOut, stayPeriod
 } = storeToRefs(usePeriodStore())
 
-//calendar event
-const calendarState = ref(false)
+//showCalendar event
 const showCalendar = () => {
-  calendarState.value = true
-}
-const onConfirm = (value) => {
-  inTimestamp.value = value[0]
-  outTimestamp.value = value[1]
-  calendarState.value = false
+  homeCalendarState.value = true
+  console.log('click')
 }
 
 </script>
@@ -31,9 +27,6 @@ const onConfirm = (value) => {
       <span>离店</span>
       <div>{{ checkOut(outTimestamp) }}</div>
     </div>
-  </div>
-  <div class="home-calendar">
-    <van-calendar v-model:show="calendarState" @confirm="onConfirm" type="range" color="#fd7e57" />
   </div>
 </template>
 

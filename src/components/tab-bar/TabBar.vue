@@ -1,6 +1,6 @@
 <script setup>
-import router from '@/router'
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router'
 
 const tabBar = [
   {
@@ -28,12 +28,20 @@ const tabBar = [
     activeUrl: 'src/assets/img/tabbar/tab_message.png',
   },
 ]
-let current = ref(0)
 
+
+// fix bug when manually switching routes in search input that the [current] hasn't changed
+const current = ref(0)
+const route = useRoute()
+watch(() => route.path, newVal => {
+  const index = tabBar.findIndex(item => item.router === newVal)
+  if (index === -1) return
+  current.value = index
+})
 </script>
 
 <template class="test">
-  <van-tabbar v-model="current" active-color="#Fd7e57">
+  <van-tabbar route v-model="current" active-color="#Fd7e57">
     <template v-for="(item, index) in tabBar" :key="item.title">
       <van-tabbar-item :to="item.router">
         <span>{{ item.title }}</span>

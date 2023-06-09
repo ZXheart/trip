@@ -1,7 +1,12 @@
 <script setup>
+import { storeToRefs } from 'pinia'
+
 import {
   useHotSuggestsStore, useCategoriesStore, useContentStore
 } from '@/stores/index'
+
+import SearchBar from '@/components/home-search-bar/SearchBar.vue'
+import HomeCalendar from '@/components/home-calendar/HomeCalendar.vue'
 
 import HomeTop from './homeComponents/HomeTop.vue'
 import HomeBanner from './homeComponents/HomeBanner.vue'
@@ -12,7 +17,6 @@ import HomeSuggests from './homeComponents/HomeSuggests.vue'
 import HomeCategories from './homeComponents/HomeCategories.vue'
 import HomeContent from './homeComponents/HomeContent.vue'
 
-import { storeToRefs } from 'pinia'
 
 
 // 1. fetch Home hotSuggestsData > put the data into pinia(hotSuggestsData)
@@ -29,6 +33,9 @@ if (contentData.value.length === 0) fetchContent()
 
 <template>
   <div class="home">
+    <SearchBar />
+    <HomeCalendar />
+
     <HomeTop />
     <HomeBanner />
     <HomeLocation />

@@ -1,5 +1,5 @@
 <script setup>
-import { watch } from 'vue'
+import { watch, computed, ref } from 'vue'
 import { _ } from 'lodash'
 import { storeToRefs } from 'pinia'
 
@@ -8,7 +8,6 @@ import useScrollToBottom from '@/hooks/useScrollToBottom'
 
 import ContentItemType9 from '@/components/home-content-item/ContentItemType9.vue'
 import contentItemType3 from '@/components/home-content-item/ContentItemType3.vue'
-
 
 // import state of [contentData&currentPage] from pinia( home > useContentStore)
 const { contentData, currentPage } = storeToRefs(useContentStore())
@@ -21,11 +20,6 @@ useScrollToBottom(() => {
   currentPage.value += 1
   fetchContent(currentPage.value)
 })
-
-// const { scrollTop } = useScrollToBottom()
-// watch(() => scrollTop.value, (newVal, oldVal) => {
-//   if (newVal >= 100) console.log('666')
-// })
 </script>
 
 <template>

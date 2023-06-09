@@ -1,8 +1,10 @@
 <script setup>
 import { usePeriodStore } from '@/stores'
+import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+
 // import period state from pinia
-const { inTimestamp, outTimestamp, checkIn, checkOut } = usePeriodStore()
+const { inTimestamp, outTimestamp, checkIn, checkOut } = storeToRefs(usePeriodStore())
 
 // back & menu event
 const router = useRouter()
@@ -11,6 +13,11 @@ const backspace = () => {
 }
 const menu = () => {
   // router()
+}
+const chooseLocationPage = () => {
+  router.push('/city')
+}
+const showCalendar = () => {
 }
 </script>
 
@@ -23,10 +30,13 @@ const menu = () => {
       <template #title>
         <div class="title-details">
           <div class="title-left">
-            <div class="location">广州</div>
-            <div class="period">
-              <span class="check-in">住<b>{{ checkIn(inTimestamp, false) }}</b></span>
-              <span class="check-out">离<b>{{ checkOut(outTimestamp, false) }}</b></span>
+            <div class="location" @click="chooseLocationPage">
+              <div class="line"></div>
+              <span>广州</span>
+            </div>
+            <div class="period" @click="showCalendar">
+              <span class="check-in">住<b>{{ checkIn(inTimestamp, 'MM.DD') }}</b></span>
+              <span class="check-out">离<b>{{ checkOut(outTimestamp, 'MM.DD') }}</b></span>
               <i></i>
             </div>
           </div>
@@ -60,15 +70,25 @@ const menu = () => {
       align-items: center;
       margin-right: 1px;
       background-color: #f1f3f5;
-      height: 30px;
+      height: 35px;
       border-top-left-radius: 7px;
       border-bottom-left-radius: 7px;
 
       .location {
+        position: relative;
         padding: 0 8px;
         font-size: 14px;
         font-weight: 400;
         line-height: 30px;
+
+        .line {
+          position: absolute;
+          right: 0;
+          top: -3px;
+          width: 1px;
+          height: 36px;
+          background-color: #fff;
+        }
       }
 
       .period {
@@ -110,7 +130,7 @@ const menu = () => {
     .title-right {
       padding: 0 7px;
       background-color: #f1f3f5;
-      height: 30px;
+      height: 35px;
       line-height: 30px;
       border-top-right-radius: 7px;
       border-bottom-right-radius: 7px;

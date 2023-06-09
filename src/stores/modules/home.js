@@ -1,25 +1,24 @@
 import { computed, ref } from "vue"
-import { formatDifference, formatWithPoint, formatWithString } from '@/utils/formatDate'
+import { formatDifference, formatWithString } from '@/utils/formatDate'
 import { getCategories, getContent, getHotSuggests } from "@/servers"
 
 import { defineStore } from "pinia"
 
 // 1. [home > period state]
 export const usePeriodStore = defineStore('periodStore', () => {
+  const homeCalendarState = ref(false)
   //default: get timestamp of checkIn(current) & checkOut(+24hours)
   const inTimestamp = ref(new Date().getTime())
   const outTimestamp = ref(new Date().getTime() + 86400000)
   // computed in&outTimestamp to 'legible string'
   const checkIn = computed(() => {
-    return (inTimestamp, isString = true) => {
-      if (isString) { return formatWithString(inTimestamp) }
-      else { return formatWithPoint(inTimestamp) }
+    return (inTimestamp, type) => {
+      return formatWithString(inTimestamp, type)
     }
   })
   const checkOut = computed(() => {
-    return (outTimestamp, isString = true) => {
-      if (isString) { return formatWithString(outTimestamp) }
-      else { return formatWithPoint(outTimestamp) }
+    return (outTimestamp, type) => {
+      return formatWithString(outTimestamp, type)
     }
   })
   //computed period of stay (checkOut - checkIn = periodOfStay[type:day])
@@ -29,7 +28,7 @@ export const usePeriodStore = defineStore('periodStore', () => {
     }
   })
   return {
-    inTimestamp, outTimestamp, checkIn, checkOut, stayPeriod
+    homeCalendarState, inTimestamp, outTimestamp, checkIn, checkOut, stayPeriod
   }
 })
 
