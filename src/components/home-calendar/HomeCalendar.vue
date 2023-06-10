@@ -7,7 +7,6 @@ const { homeCalendarState, inTimestamp, outTimestamp } = storeToRefs(usePeriodSt
 
 //calendar confirm event
 const onConfirm = (value) => {
-  console.log(value[0])
   inTimestamp.value = value[0]
   outTimestamp.value = value[1]
   homeCalendarState.value = false

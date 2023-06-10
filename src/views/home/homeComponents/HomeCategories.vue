@@ -28,6 +28,7 @@ const { categoriesData } = storeToRefs(useCategoriesStore())
   &::-webkit-scrollbar {
     width: 0;
     height: 0;
+    background-color: transparent;
   }
 
   .categories-item {

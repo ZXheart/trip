@@ -2,8 +2,6 @@
 import { usePeriodStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 
-import HomeCalendar from '@/components/home-calendar/HomeCalendar.vue'
-
 // import state of period from pinia( home > usePeriodStore )
 const { homeCalendarState, inTimestamp, outTimestamp, checkIn, checkOut, stayPeriod
 } = storeToRefs(usePeriodStore())
@@ -11,7 +9,6 @@ const { homeCalendarState, inTimestamp, outTimestamp, checkIn, checkOut, stayPer
 //showCalendar event
 const showCalendar = () => {
   homeCalendarState.value = true
-  console.log('click')
 }
 
 </script>

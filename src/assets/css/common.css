@@ -1,4 +1,6 @@
 :root {
   --primary-color: #fd7e57;
-  --common-gray-color: #aaa
+  --common-gray-color: #aaa;
+  /* --van-primary-color: var(--primary-color) !important;
+  --van-text-color: var(--primary-color) !important; */
 }

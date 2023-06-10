@@ -1,12 +1,14 @@
 <script setup>
 import TabBar from './components/tab-bar/TabBar.vue'
-import { useRoute } from 'vue-router'
-const route = useRoute()
+import Loading from './components/loading/Loading.vue'
+
+
 </script>
 
 <template>
-  <RouterView></RouterView>
-  <TabBar v-if="!route.meta.hiddenTabBar"></TabBar>
+  <RouterView />
+  <Loading />
+  <TabBar />
 </template>
 
 <style scoped></style> 

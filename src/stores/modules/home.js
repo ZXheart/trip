@@ -4,10 +4,10 @@ import { getCategories, getContent, getHotSuggests } from "@/servers"
 
 import { defineStore } from "pinia"
 
-// 1. [home > period state]
+//* 1. [home > period state]
 export const usePeriodStore = defineStore('periodStore', () => {
   const homeCalendarState = ref(false)
-  //default: get timestamp of checkIn(current) & checkOut(+24hours)
+  // get default timestamp of checkIn(current) & checkOut(+24hours)
   const inTimestamp = ref(new Date().getTime())
   const outTimestamp = ref(new Date().getTime() + 86400000)
   // computed in&outTimestamp to 'legible string'
@@ -21,7 +21,7 @@ export const usePeriodStore = defineStore('periodStore', () => {
       return formatWithString(outTimestamp, type)
     }
   })
-  //computed period of stay (checkOut - checkIn = periodOfStay[type:day])
+  // computed period of stay (checkOut - checkIn)
   const stayPeriod = computed(() => {
     return (outTimestamp, inTimestamp) => {
       return formatDifference(outTimestamp, inTimestamp)
@@ -32,7 +32,7 @@ export const usePeriodStore = defineStore('periodStore', () => {
   }
 })
 
-// 2. [home > hot suggests state] 
+//* 2. [home > hot suggests state] 
 export const useHotSuggestsStore = defineStore('hotSuggestsStore', () => {
   // hot suggests state
   const hotSuggestsData = ref({})
@@ -45,7 +45,7 @@ export const useHotSuggestsStore = defineStore('hotSuggestsStore', () => {
   return { hotSuggestsData, fetchHotSuggests }
 })
 
-//3. [home > categories state]
+//* 3. [home > categories state]
 export const useCategoriesStore = defineStore('categoriesStore', () => {
   // categories state
   const categoriesData = ref({})
@@ -59,7 +59,7 @@ export const useCategoriesStore = defineStore('categoriesStore', () => {
   }
 })
 
-// 4. [home > content list state]
+//* 4. [home > content(products) list state]
 export const useContentStore = defineStore('contentStore', () => {
   // content list state
   const contentData = ref([])

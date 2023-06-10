@@ -1,6 +1,13 @@
 import { BASE_URL, TIMEOUT } from './config'
 
 import axios from "axios"
+import { ref } from 'vue'
+import { useMainStore } from '@/stores'
+
+//? const mainStore = useMainStore()
+//! There's a huge issue here when the 'useMainStore()' was executed. it will cause an error as: "Can't access 'useMainStore' before initialization". it means the 'pinia' not even created while the 'useMainStore()' was executed 
+
+const mainStore = ref({})
 
 class PackagedAxios {
   constructor(baseURL, timeout = 10000) {
@@ -8,7 +15,25 @@ class PackagedAxios {
       baseURL,
       timeout
     })
+
+    this.instance.interceptors.request.use(config => {
+      //! so that i have to using here 
+      mainStore.value = useMainStore()
+      mainStore.value.isLoading = true
+      return config
+    }, err => {
+      return Promise.reject(err)
+    })
+    this.instance.interceptors.response.use(res => {
+      mainStore.value.isLoading = false
+      return res
+    }, err => {
+      mainStore.value.isLoading = false
+      return Promise.reject(err)
+    })
   }
+
+
 
   request(config) {
     return new Promise((resolve, reject) => {

@@ -1,6 +1,4 @@
 <script setup>
-import { watch, computed, ref } from 'vue'
-import { _ } from 'lodash'
 import { storeToRefs } from 'pinia'
 
 import { useContentStore } from '@/stores'
@@ -8,18 +6,25 @@ import useScrollToBottom from '@/hooks/useScrollToBottom'
 
 import ContentItemType9 from '@/components/home-content-item/ContentItemType9.vue'
 import contentItemType3 from '@/components/home-content-item/ContentItemType3.vue'
+import { useRouter } from 'vue-router'
 
-// import state of [contentData&currentPage] from pinia( home > useContentStore)
+//* [pinia] > state of contentData, currentPage
 const { contentData, currentPage } = storeToRefs(useContentStore())
 
-// import function of fetch Home contentData
+//* [pinia] > function of fetch Home's contentData
 const { fetchContent } = useContentStore()
 
-// hooks
+//* [hooks] > get more data by using fetchContent()
 useScrollToBottom(() => {
   currentPage.value += 1
   fetchContent(currentPage.value)
 })
+
+// *[local] > into details page
+const router = useRouter()
+const getDetails = (item) => {
+  router.push('/ProductDetails/' + item.data.houseId)
+}
 </script>
 
 <template>
@@ -31,8 +36,8 @@ useScrollToBottom(() => {
     <div class="content-list">
       <template v-for="(item, index) in contentData" :key="item.data.houseId">
         <div class="content-item">
-          <ContentItemType9 v-if="item.discoveryContentType === 9" :item="item" />
-          <contentItemType3 v-else-if="item.discoveryContentType === 3" :item="item" />
+          <ContentItemType9 v-if="item.discoveryContentType === 9" :item="item" @click="getDetails(item)" />
+          <contentItemType3 v-else-if="item.discoveryContentType === 3" :item="item" @click="getDetails(item)" />
         </div>
       </template>
     </div>

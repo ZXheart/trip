@@ -5,7 +5,6 @@ import { useRouter } from 'vue-router'
 
 import { usePeriodStore } from '@/stores'
 import useScrollToBottom from '@/hooks/useScrollToBottom'
-import HomeCalendar from '../home-calendar/HomeCalendar.vue'
 
 // ## two plans for watching the [showSearchBar's] change
 const { scrollTop } = useScrollToBottom()
