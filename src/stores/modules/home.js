@@ -68,7 +68,7 @@ export const useContentStore = defineStore('contentStore', () => {
   // fetch content data
   const fetchContent = async (pageCounter = currentPage.value) => {
     const res = await getContent(pageCounter)
-    contentData.value.push(...res.data)
+    contentData.value.push(...await res.data)
   }
   return {
     contentData, currentPage, fetchContent

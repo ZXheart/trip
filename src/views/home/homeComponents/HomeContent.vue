@@ -20,13 +20,13 @@ useScrollToBottom(() => {
   fetchContent(currentPage.value)
 })
 
-// *[local] > into details page
+// *[local] > into product details page
 const router = useRouter()
 const getDetails = (item) => {
   router.push('/ProductDetails/' + item.data.houseId)
 }
 </script>
-
+ 
 <template>
   <div class="home-content">
     <div class="content-title">

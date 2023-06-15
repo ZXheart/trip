@@ -49,7 +49,22 @@ const router = createRouter({
         hiddenTabBar: true
       }
     },
-  ]
+    {
+      path: '/:pathMatch(.*)',
+      name: 'notFound',
+      component: () => import('../components/not-found/NotFound.vue'),
+      meta: {
+        hiddenTabBar: true
+      }
+    },
+  ],
+  scrollBehavior(to, from, savedPos) {
+    if (to.path === '/') return savedPos
+    return {
+      top: 0,
+      behavior: 'smooth'
+    }
+  }
 })
 
 export default router

@@ -1,30 +1,37 @@
 <script setup>
-import { useRouter } from 'vue-router'
-import { useCityStore } from '@/stores'
 import { storeToRefs } from 'pinia'
-const { currentCity } = storeToRefs(useCityStore())
+import { useRouter } from 'vue-router'
 
-// switchLocation
+import { useMainStore } from '@/stores'
+
+
+const { currentCity, getLocationLoading } = storeToRefs(useMainStore())
+const { getCurrentCity } = useMainStore()
+
+// * A. choose location manually
 const router = useRouter()
 const switchLocation = () => {
   router.push('/City')
 }
-// [refresh / get] location
+
+// * B. getting location while the first time come into the home page
+(() => getCurrentCity())()
+
+// * C. [refresh / get] location
 const getLocation = () => {
-  navigator.geolocation.getCurrentPosition(async pos => {
-    console.log(pos)
-  }, err => {
-    console.log(err)
-  }), { enableHighAccuracy: true }
+  getCurrentCity()
 }
 </script>
 
 <template>
   <div class="home-location">
-    <div class="switch-location" @click="switchLocation">{{ currentCity.name }}</div>
+    <div class="switch-location" @click="switchLocation">
+      {{ currentCity.name }}
+    </div>
     <div class="get-location" @click="getLocation">
-      <span>我的位置</span>
-      <img src="@/assets/img/home/icon_location.png" alt="get position">
+      <span class="text">我的位置</span>
+      <img v-if="!getLocationLoading" src="@/assets/img/home/icon_location.png" alt="get position">
+      <van-loading v-if="getLocationLoading" type="spinner" color="#fd7e57" size="15px" />
     </div>
   </div>
 </template>
@@ -42,11 +49,10 @@ const getLocation = () => {
   }
 
   .get-location {
+    display: flex;
     width: 80px;
 
-    span {
-      position: relative;
-      top: 1px;
+    span.text {
       margin-right: 5px;
     }
 

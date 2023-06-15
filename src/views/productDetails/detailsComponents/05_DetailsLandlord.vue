@@ -112,6 +112,7 @@ const matchStr = (str) => {
         display: flex;
         align-items: center;
         margin: 4px 0;
+        font-size: 12px;
 
         span {
           display: flex;
@@ -131,6 +132,7 @@ const matchStr = (str) => {
         padding: 2px 5px;
         background-color: #f1f3f5;
         border-radius: 3px;
+        font-size: 12px;
       }
     }
 
@@ -146,10 +148,22 @@ const matchStr = (str) => {
   }
 
   .hotel-summary {
-    .summary-item {
-      .title {}
+    display: flex;
+    align-items: center;
+    margin: 30px 0 10px;
 
-      .introduction {}
+    .summary-item {
+      flex: 1;
+      font-size: 12px;
+
+      .title {
+        color: var(--common-gray-color);
+      }
+
+      .introduction {
+        font-weight: 700;
+        font-size: 20px;
+      }
 
       .tip {
         .highlight {

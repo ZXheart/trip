@@ -19,21 +19,19 @@ class PackagedAxios {
     this.instance.interceptors.request.use(config => {
       //! so that i have to using here 
       mainStore.value = useMainStore()
-      mainStore.value.isLoading = true
+      mainStore.value.globalLoading = true
       return config
     }, err => {
       return Promise.reject(err)
     })
     this.instance.interceptors.response.use(res => {
-      mainStore.value.isLoading = false
+      mainStore.value.globalLoading = false
       return res
     }, err => {
-      mainStore.value.isLoading = false
+      mainStore.value.globalLoading = false
       return Promise.reject(err)
     })
   }
-
-
 
   request(config) {
     return new Promise((resolve, reject) => {

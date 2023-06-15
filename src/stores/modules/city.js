@@ -6,11 +6,10 @@ export const useCityStore = defineStore('cityStore', () => {
   const cityData = ref({})
   const activeTab = ref('')
   const backToTop = ref(false)
-  const currentCity = ref({ ID: '48', name: '北京' })
 
   const fetchAllCity = async () => {
     const res = await getAllCity()
-    cityData.value = res.data
+    cityData.value = await res.data
   }
 
   return { cityData, activeTab, backToTop, currentCity, fetchAllCity, }

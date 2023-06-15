@@ -1,14 +1,18 @@
 <script setup>
-import { useCityStore } from '@/stores'
 import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+
+
+import { useCityStore, useMainStore } from '@/stores'
+
 // import state from pinia( city )
-const { cityData, activeTab, backToTop, currentCity } = storeToRefs(useCityStore())
+const { cityData, activeTab, backToTop } = storeToRefs(useCityStore())
+const { currentCity } = storeToRefs(useMainStore())
 
 // back to top
 const content = ref()
-watch(() => backToTop.value, (newVal, oldVal) => {
+watch(() => backToTop.value, newVal => {
   newVal && (content.value.scrollTop = 0 + 'px')
   backToTop.value = false
 }, { immediate: true })

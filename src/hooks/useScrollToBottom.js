@@ -14,15 +14,15 @@ export default function useScrollToBottom(reachBottomCB) {
   const clientHeight = document.documentElement.clientHeight
   const scrollHeight = ref(0)
   const scrollTop = ref(0)
-  const getDistanceToBottom = () => {
+  const getDistanceToBottom = _.throttle(() => {
     scrollHeight.value = document.documentElement.scrollHeight
     scrollTop.value = document.documentElement.scrollTop
     if (scrollHeight.value - (scrollTop.value + clientHeight) < 100) {
       if (reachBottomCB) reachBottomCB()
     }
-  }
+  }, 500)
   onMounted(() => {
-    window.addEventListener('scroll', _.throttle(getDistanceToBottom, 500))
+    window.addEventListener('scroll', getDistanceToBottom)
   })
   onUnmounted(() => {
     window.removeEventListener('scroll', getDistanceToBottom)

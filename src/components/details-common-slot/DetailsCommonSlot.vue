@@ -6,7 +6,7 @@ const props = defineProps({
   },
   showMore: {
     type: String,
-    default: '展示更多'
+    default: ''
   },
   BGColor: {
     type: String,
@@ -18,7 +18,7 @@ const props = defineProps({
   }
 })
 const moreFacilities = () => {
-  console.log('666')
+  console.log('to', props.title)
 }
 </script>
 
@@ -30,7 +30,7 @@ const moreFacilities = () => {
     <div class="content">
       <slot name="content">6</slot>
     </div>
-    <div class="footer" @click="moreFacilities">
+    <div class="footer" v-if="showMore.length" @click="moreFacilities">
       {{ showMore }}<van-icon name="arrow" />
     </div>
   </div>
