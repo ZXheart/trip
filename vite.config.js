@@ -1,7 +1,7 @@
 import { URL, fileURLToPath } from 'node:url'
 
-import Components from 'unplugin-vue-components/vite';
-import { VantResolver } from 'unplugin-vue-components/resolvers';
+import Components from 'unplugin-vue-components/vite'
+import { VantResolver } from 'unplugin-vue-components/resolvers'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
@@ -16,6 +16,15 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  },
+  css: {
+    postcss: {
+      plugins: [
+        require('postcss-px-to-viewport')({
+          viewportWidth: 375
+        })
+      ]
     }
   }
 })

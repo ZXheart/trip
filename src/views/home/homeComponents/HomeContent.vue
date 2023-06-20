@@ -8,19 +8,19 @@ import ContentItemType9 from '@/components/home-content-item/ContentItemType9.vu
 import contentItemType3 from '@/components/home-content-item/ContentItemType3.vue'
 import { useRouter } from 'vue-router'
 
-//* [pinia] > state of contentData, currentPage
+//* A. [pinia] > state of contentData, currentPage
 const { contentData, currentPage } = storeToRefs(useContentStore())
 
-//* [pinia] > function of fetch Home's contentData
+//* B. [pinia] > function of fetch Home's contentData
 const { fetchContent } = useContentStore()
 
-//* [hooks] > get more data by using fetchContent()
+//* C. [hooks] > fetch more data when the scroll almost towards the end(bottom)
 useScrollToBottom(() => {
   currentPage.value += 1
   fetchContent(currentPage.value)
 })
 
-// *[local] > into product details page
+//* D. [local] > into product details page
 const router = useRouter()
 const getDetails = (item) => {
   router.push('/ProductDetails/' + item.data.houseId)
@@ -30,7 +30,7 @@ const getDetails = (item) => {
 <template>
   <div class="home-content">
     <div class="content-title">
-      <div class="icon"></div>
+      <van-icon name="fire" color="#fd7e57" />
       <h1 class="title">热门精选</h1>
     </div>
     <div class="content-list">
@@ -56,16 +56,6 @@ const getDetails = (item) => {
 
     h1.title {
       font-weight: 700;
-    }
-
-    .icon {
-      margin-right: 2px;
-      width: 20px;
-      height: 23px;
-      background-image: url(@/assets/img/sprite.png);
-      background-repeat: no-repeat;
-      background-position: bottom left;
-
     }
   }
 

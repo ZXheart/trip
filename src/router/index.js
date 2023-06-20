@@ -58,11 +58,13 @@ const router = createRouter({
       }
     },
   ],
-  scrollBehavior(to, from, savedPos) {
-    if (to.path === '/') return savedPos
-    return {
-      top: 0,
-      behavior: 'smooth'
+  scrollBehavior(to, from, savedPosition) {
+    if (to.path === '/') return false
+    else {
+      return {
+        top: 0,
+        behavior: 'smooth'
+      }
     }
   }
 })

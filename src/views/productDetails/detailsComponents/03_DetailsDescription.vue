@@ -59,8 +59,7 @@ const showMap = () => {
 
 <style lang="less" scoped>
 .details-description {
-  margin-top: 20px;
-  padding: 0 16px 5px;
+  padding: 20px 16px 5px;
   background-color: #fff;
 
   .house-name {

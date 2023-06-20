@@ -8,10 +8,10 @@ const { currentProductInfos } = storeToRefs(useDetailsStore())
 const mainPart = currentProductInfos.value.mainPart
 const ensure = mainPart.ensureModule
 
-const toTop = ref()
-onMounted(() => {
-  console.log(toTop.value.offsetTop)
-})
+// const toTop = ref()
+// onMounted(() => {
+//   console.log(toTop.value.offsetTop)
+// })
 </script>
 
 <template>

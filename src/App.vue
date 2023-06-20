@@ -6,7 +6,11 @@ import Loading from './components/loading/Loading.vue'
 </script>
 
 <template>
-  <RouterView />
+  <RouterView v-slot="props">
+    <KeepAlive include="Home">
+      <component :is="props.Component" />
+    </KeepAlive>
+  </RouterView>
   <Loading />
   <TabBar />
 </template>

@@ -62,7 +62,7 @@ const matchStr = (title) => {
 
 <template>
   <div class="details-banner">
-    <van-swipe class="my-swipe" style="height: 250px;" :autoplay="4000">
+    <van-swipe class="my-swipe" :autoplay="4000">
       <van-swipe-item class="swipe-list" v-for="(pic, picIndex) in rendersAlbum" :key="picIndex">
         <img :src="pic.albumUrl" alt="house pic~">
       </van-swipe-item>

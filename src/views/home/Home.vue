@@ -1,9 +1,12 @@
 <script setup>
+import { ref, computed, onActivated, onDeactivated } from 'vue'
 import { storeToRefs } from 'pinia'
 
 import {
   useHotSuggestsStore, useCategoriesStore, useContentStore
 } from '@/stores/index'
+
+import useScrollToBottom from '@/hooks/useScrollToBottom'
 
 import SearchBar from '@/components/home-search-bar/SearchBar.vue'
 import HomeCalendar from '@/components/home-calendar/HomeCalendar.vue'
@@ -17,18 +20,30 @@ import HomeSuggests from './homeComponents/HomeSuggests.vue'
 import HomeCategories from './homeComponents/HomeCategories.vue'
 import HomeContent from './homeComponents/HomeContent.vue'
 
-
-
-// 1. fetch Home hotSuggestsData > put the data into pinia(hotSuggestsData)
+//* A. fetch Home hotSuggestsData & put it into pinia(hotSuggestsData)
 const { fetchHotSuggests } = useHotSuggestsStore()
 fetchHotSuggests()
-// 2. fetch Home catagoriesData > put the data into pinia(categoriesData)
+
+//* B. fetch Home catagoriesData & put it into pinia(categoriesData)
 const { fetchCategories } = useCategoriesStore()
 fetchCategories()
-// 3. fetch Home contentData > put the data into pinia(contentData)
+
+//* C. fetch Home contentData & put it into pinia(contentData)
 const { fetchContent } = useContentStore()
 const { contentData } = storeToRefs(useContentStore())
 if (contentData.value.length === 0) fetchContent()
+
+//* D 
+const { scrollTop } = useScrollToBottom()
+const newRes = ref(0)
+onDeactivated(() => {
+  newRes.value = scrollTop.value
+})
+onActivated(() => {
+  document.documentElement.scrollTo({
+    top: newRes.value
+  })
+})
 </script>
 
 <template>
@@ -51,5 +66,6 @@ if (contentData.value.length === 0) fetchContent()
 .home {
   --van-calendar-popup-height: 90%;
   padding-bottom: 50px;
+
 }
 </style>

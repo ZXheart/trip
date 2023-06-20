@@ -33,6 +33,6 @@ export const useMainStore = defineStore('mainStore', () => {
       })
     })
   }
-  return { globalLoading, getLocationLoading, currentCity, getCurrentCity }
+  return { globalLoading, getLocationLoading, currentCity,  getCurrentCity }
 
 })
